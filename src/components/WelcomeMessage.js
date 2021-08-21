@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import SpotifyWebApi from "spotify-web-api-node";
+import Cookies from "js-cookie";
 
 
 function WelcomeMessage(props) {
@@ -14,7 +15,8 @@ function WelcomeMessage(props) {
             },
             error=>{
                 if (error.body.error.status === 401) {
-                    props.expireToken()
+                    props.expireToken();
+                    Cookies.set('spotifyAuthToken', "");
                 }
             }
         );
